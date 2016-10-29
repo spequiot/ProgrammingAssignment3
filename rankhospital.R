@@ -30,7 +30,6 @@ rankhospital <- function(state, outcome, num = "best") {
         if (num=="best") num <- 1
         else if (num=="worst") num <- nrow(data)
         data <- data[rnk,2]
-        print(head(data))
         data[num]
         
 }

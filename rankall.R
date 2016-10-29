@@ -15,6 +15,7 @@ rankall <- function(outcome, num = "best") {
         if (is.na(selOutcome)) stop('Invalid outcomeout. Must be one of "heart attack", "heart failure", "pneumonia"')
         
         ##Return a data frame with the hospital names and the state
+        ##split data by state and apply order to each
         data <- split(data[,c(2,7,selOutcome)],data$State)
         if (num=="best") num <- 1
         if (num=="worst") {
@@ -24,8 +25,10 @@ rankall <- function(outcome, num = "best") {
                 data<-lapply(data,function(x) x[order(x[,3],x[,1]),1][num])
         }
         
+        ##Convert the list to data frame
         data<-as.data.frame(data)
         data<-cbind(t(data),colnames(data))
+        data<-as.data.frame(data)
         colnames(data)<-c("hospital","state")
         data
 }
